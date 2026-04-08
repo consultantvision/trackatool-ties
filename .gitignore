@@ -30,12 +30,12 @@ desktop.ini
 logs/
 *.log
 
-# Build outputs
-dist/
-build/
-out/
-.next/
-.cache/
+# Build outputs (/ prefix anchors to repo root only)
+/dist/
+/build/
+/out/
+/.next/
+/.cache/
 
 # Temporary files
 tmp/

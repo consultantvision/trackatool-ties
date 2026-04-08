@@ -1,0 +1,973 @@
+/* ===================================================================
+   Customer Details UI — styles.css
+   Clean Clinical design: white/light-gray, blue accents, card sections
+   =================================================================== */
+
+/* --- Reset & Base -------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --- Custom Properties --------------------------------------------- */
+:root {
+  --color-primary:       #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-success:       #22c55e;
+  --color-success-bg:    #dcfce7;
+  --color-danger:        #ef4444;
+  --color-danger-bg:     #fee2e2;
+  --color-warning:       #f59e0b;
+
+  --color-bg:            #f1f5f9;
+  --color-surface:       #ffffff;
+  --color-surface-alt:   #f8fafc;
+  --color-border:        #e2e8f0;
+  --color-border-focus:  #3b82f6;
+
+  --color-text:          #1e293b;
+  --color-text-muted:    #64748b;
+  --color-text-placeholder: #94a3b8;
+  --color-text-link:     #3b82f6;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.10);
+  --shadow-focus: 0 0 0 3px rgba(59,130,246,0.20);
+
+  --font-size-xs:   11px;
+  --font-size-sm:   12px;
+  --font-size-base: 13px;
+  --font-size-md:   14px;
+  --font-size-lg:   16px;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  12px;
+  --spacing-lg:  16px;
+  --spacing-xl:  24px;
+  --spacing-2xl: 32px;
+
+  --input-height: 26px;
+  --header-bg: #ffffff;
+}
+
+/* --- Root App ------------------------------------------------------ */
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.customer-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Header -------------------------------------------------------- */
+.customer-header {
+  background: var(--color-header-bg, var(--color-surface));
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md) var(--spacing-xl);
+  flex-shrink: 0;
+}
+
+.customer-header__row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.customer-header__row:last-child { margin-bottom: 0; }
+
+.customer-header__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.status-btn {
+  padding: 3px 14px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1.6;
+}
+
+.status-btn--active {
+  background: var(--color-success-bg);
+  color: #166534;
+  border-color: var(--color-success);
+}
+
+.status-btn--active.is-selected {
+  background: var(--color-success);
+  color: #ffffff;
+}
+
+.status-btn--inactive {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.status-btn--inactive.is-selected {
+  background: var(--color-danger);
+  color: #ffffff;
+  border-color: var(--color-danger);
+}
+
+.customer-header__title {
+  border: 2px solid var(--color-text);
+  padding: 4px 20px;
+  font-weight: 700;
+  font-size: var(--font-size-md);
+  text-align: center;
+  flex: 0 0 auto;
+  letter-spacing: 0.3px;
+}
+
+.customer-header__spacer { flex: 1; }
+
+.customer-header__sales {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.customer-header__sales .form-field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: 0;
+}
+
+.customer-header__sales .form-label {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.customer-header__sales .form-select {
+  width: 160px;
+}
+
+/* --- Customer ID Row ----------------------------------------------- */
+.customer-id-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.customer-id-row .form-field {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: 0;
+}
+
+.customer-id-row .form-label {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.customer-id-row .form-input {
+  width: 120px;
+}
+
+.name-field {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 0 0 auto;
+}
+
+.name-field .form-input {
+  width: 240px;
+  border-right: none;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.name-dropdown-btn {
+  height: var(--input-height);
+  width: 24px;
+  border: 1px solid var(--color-border);
+  border-left: none;
+  background: var(--color-surface-alt);
+  cursor: pointer;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 9px;
+  flex-shrink: 0;
+}
+
+.name-dropdown-btn:hover { background: var(--color-border); }
+
+.show-inactive {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  margin-left: var(--spacing-sm);
+  white-space: nowrap;
+}
+
+/* --- Address Section ----------------------------------------------- */
+.address-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.address-col__title {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* --- Tab Navigation ------------------------------------------------ */
+.tab-nav {
+  display: flex;
+  background: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
+  padding: 0 var(--spacing-xl);
+  gap: 0;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.tab-nav::-webkit-scrollbar { display: none; }
+
+.tab-nav__btn {
+  padding: 8px 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.tab-nav__btn:hover {
+  color: var(--color-text);
+  background: var(--color-surface-alt);
+}
+
+.tab-nav__btn--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.tab-nav__icon {
+  font-style: normal;
+  font-size: var(--font-size-sm);
+}
+
+/* --- Tab Content --------------------------------------------------- */
+.tab-content {
+  flex: 1 0 auto;
+}
+
+.tab-stub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 240px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+/* --- Section Card -------------------------------------------------- */
+.section-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+.section-card__title {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* --- Form Elements ------------------------------------------------- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-field:last-child { margin-bottom: 0; }
+
+.form-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.form-input,
+.form-select {
+  height: var(--input-height);
+  padding: 0 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  width: 100%;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.form-input::placeholder { color: var(--color-text-placeholder); }
+
+.form-select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  resize: vertical;
+  min-height: 180px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Split row: two inputs side by side */
+.form-row--split {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+.form-row--split .form-field { flex: 1; }
+.form-row--split .form-field--narrow { flex: 0 0 80px; }
+
+/* Inline row: checkbox + label + optional remove button */
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: var(--input-height);
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-inline:last-child { margin-bottom: 0; }
+
+.form-checkbox {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.form-check-label {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  cursor: pointer;
+  flex: 1;
+}
+
+.form-check-label--muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Remove [-] button */
+.btn-remove {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  background: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  padding: 0;
+}
+
+.btn-remove:hover {
+  background: var(--color-danger-bg);
+}
+
+/* Separator between inline items */
+.form-inline-sep {
+  color: var(--color-border);
+  margin: 0 var(--spacing-xs);
+}
+
+/* Input with icon on the right (e.g. name combo) */
+.input-combo {
+  display: flex;
+  align-items: stretch;
+}
+
+/* --- Buttons ------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 5px 16px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+.btn--primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+
+.btn--secondary {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.btn--secondary:hover { background: var(--color-border); }
+
+.btn--outlined {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+.btn--outlined:hover { background: var(--color-surface-alt); color: var(--color-text); }
+
+.btn--link {
+  background: none;
+  border: none;
+  color: var(--color-text-link);
+  padding: 0;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-icon {
+  margin-right: 2px;
+  font-size: var(--font-size-xs);
+}
+
+/* --- General Setup Tab --------------------------------------------- */
+.general-setup {
+  padding: var(--spacing-md) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  background: var(--color-bg);
+}
+
+.general-setup__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  align-items: start;
+}
+
+.general-setup__row--bottom {
+  grid-template-columns: 1fr 2fr;
+}
+
+/* Left stack: Delivery + Freight stacked vertically */
+.general-setup__left-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* --- Currency Field ------------------------------------------------ */
+.currency-input-wrap {
+  display: flex;
+  align-items: stretch;
+}
+
+.currency-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-right: none;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  height: var(--input-height);
+  line-height: 1;
+}
+
+.form-input--currency {
+  text-align: right;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Inline form-field (label beside input, used in dept panel title bar) */
+.form-field--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.form-field--inline .form-label {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* --- Department Management Panel ----------------------------------- */
+.dept-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.dept-panel__titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dept-panel__close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+}
+
+.dept-panel__close:hover {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.dept-panel__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.dept-panel__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.dept-panel__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  min-height: 200px;
+  color: var(--color-text-muted);
+}
+
+.dept-panel__hint {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+}
+
+.dept-panel__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.general-setup__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-sm) 0;
+  flex-wrap: wrap;
+}
+
+.general-setup__footer .form-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: 0;
+}
+
+.general-setup__footer .form-select {
+  width: 160px;
+}
+
+.notes-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.notes-area .section-card__title { margin-bottom: var(--spacing-xs); }
+.notes-area .form-textarea { flex: 1; }
+
+/* --- Footer Actions ------------------------------------------------ */
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  position: sticky;
+  bottom: 0;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+}
+
+.footer-actions__spacer { flex: 1; }
+
+/* --- Link ---------------------------------------------------------- */
+a.eway-link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-link);
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+a.eway-link:hover { color: var(--color-primary-hover); }
+
+/* --- Scrollbar (subtle) ------------------------------------------- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
+
+/* ===================================================================
+   RESPONSIVE — Surface Pro (768px – 1439px)
+   2-column General Setup grids, slightly larger touch targets
+   =================================================================== */
+@media (min-width: 640px) and (max-width: 1439px) {
+
+  /* Slightly increase input height for touch */
+  :root {
+    --input-height: 32px;
+    --font-size-base: 13px;
+  }
+
+  /* Header: let sales fields wrap gracefully */
+  .customer-header__row { flex-wrap: wrap; gap: var(--spacing-sm); }
+  .customer-header__spacer { display: none; }
+  .customer-header__sales { flex-wrap: wrap; }
+  .customer-header__sales .form-select { width: 150px; }
+
+  /* Customer ID row: compact */
+  .customer-id-row { flex-wrap: wrap; gap: var(--spacing-sm); }
+
+  /* Address: keep 3 columns but tighten gap */
+  .address-section { gap: var(--spacing-sm); padding: var(--spacing-sm) var(--spacing-lg); }
+
+  /* General Setup padding */
+  .general-setup { padding: var(--spacing-md) var(--spacing-lg); }
+
+  /* Row 1: 2 × 2 grid (Dept+Quotation | Invoice+Service Report) */
+  .general-setup__row {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  /* Row 2: left-stack | dept-panel side by side */
+  .general-setup__row--bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  /* Tab nav: compact labels */
+  .tab-nav { padding: 0 var(--spacing-lg); }
+  .tab-nav__btn { padding: 7px 10px; font-size: 11px; }
+
+  /* Footer */
+  .footer-actions { padding: var(--spacing-sm) var(--spacing-lg); }
+}
+
+/* ===================================================================
+   RESPONSIVE — Large Desktop / Surface Pro Studio (≥ 1440px)
+   4-column retained, generous spacing, max-width cap
+   =================================================================== */
+@media (min-width: 1440px) {
+  .customer-app { max-width: 1920px; margin: 0 auto; }
+
+  :root {
+    --font-size-base: 14px;
+    --input-height: 28px;
+    --spacing-xl: 28px;
+  }
+
+  .general-setup { padding: var(--spacing-lg) var(--spacing-2xl); }
+  .customer-header { padding: var(--spacing-lg) var(--spacing-2xl); }
+  .address-section { padding: var(--spacing-lg) var(--spacing-2xl); }
+  .tab-nav { padding: 0 var(--spacing-2xl); }
+  .footer-actions { padding: var(--spacing-md) var(--spacing-2xl); }
+}
+
+/* ===================================================================
+   RESPONSIVE — Mobile (≤ 767px)
+   Single-column, full-width, touch-first (44px targets)
+   =================================================================== */
+@media (max-width: 639px) {
+
+  :root {
+    --input-height: 40px;
+    --font-size-base: 14px;
+    --font-size-sm: 13px;
+    --spacing-xl: 12px;
+    --spacing-2xl: 16px;
+  }
+
+  /* --- Header: stack vertically ----------------------------------- */
+  .customer-header { padding: var(--spacing-sm) var(--spacing-md); }
+
+  .customer-header__row {
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .customer-header__title {
+    order: -1;
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .customer-header__status { order: -2; }
+  .customer-header__spacer { display: none; }
+
+  .customer-header__sales {
+    width: 100%;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .customer-header__sales .form-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .customer-header__sales .form-select { width: 100%; }
+
+  /* --- Customer ID row: stack ------------------------------------ */
+  .customer-id-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .customer-id-row .form-field { width: 100%; }
+  .customer-id-row .form-input { width: 100% !important; }
+  .name-field { width: 100%; }
+  .name-field .form-input { flex: 1; }
+
+  /* --- Address: single column ------------------------------------ */
+  .address-section {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-md);
+  }
+
+  /* Collapsible section titles on mobile (visual affordance) */
+  .address-col__title {
+    font-size: var(--font-size-sm);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* --- Tab nav: scrollable with larger tap targets --------------- */
+  .tab-nav { padding: 0; gap: 0; }
+
+  .tab-nav__btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+
+  /* --- General Setup: single column ------------------------------ */
+  .general-setup {
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .general-setup__row {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .general-setup__row--bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .dept-panel { min-height: 280px; }
+  .dept-panel__body { grid-template-columns: 1fr; }
+
+  /* --- Form elements: touch-friendly ----------------------------- */
+  .form-input,
+  .form-select {
+    height: var(--input-height);
+    font-size: var(--font-size-base);
+    padding: 0 10px;
+  }
+
+  .form-checkbox {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .form-check-label { font-size: var(--font-size-base); }
+
+  .btn-remove {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  /* --- Section card: tighter on mobile --------------------------- */
+  .section-card { padding: var(--spacing-sm); }
+  .section-card__title { font-size: 11px; margin-bottom: var(--spacing-sm); }
+
+  /* --- Buttons: full-width on mobile ----------------------------- */
+  .btn { min-height: 44px; padding: 8px 16px; font-size: var(--font-size-md); }
+
+  .footer-actions {
+    padding: var(--spacing-sm) var(--spacing-md);
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-actions .btn { flex: 1 0 auto; justify-content: center; }
+  .footer-actions__spacer { display: none; }
+
+  /* --- General setup footer row: stack --------------------------- */
+  .general-setup__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .general-setup__footer .form-select { width: 100%; }
+  .general-setup__footer .btn { width: 100%; justify-content: center; }
+}
+
+/* ===================================================================
+   TOUCH ENHANCEMENTS (all touch devices)
+   Prevent double-tap zoom, improve tap feedback
+   =================================================================== */
+@media (hover: none) and (pointer: coarse) {
+  button, .btn, .tab-nav__btn, .status-btn {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 44px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  }
+
+  .form-checkbox { min-width: 20px; min-height: 20px; }
+}

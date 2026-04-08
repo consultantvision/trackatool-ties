@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "customer-details",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "customer-details", "--listen", "3141"],
+      "port": 3141
+    }
+  ]
+}
